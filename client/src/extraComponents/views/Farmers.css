@@ -1,0 +1,30 @@
+#sideFarmer {
+  height: 80vh;
+}
+
+.tabs {
+  background-color: #2a803b;
+}
+
+.tabContainer {
+  padding-top: 10px;
+}
+
+.tabs .tab a {
+  color: #fff;
+}
+
+.tabs .tab a:hover {
+  background-color: #eee;
+  color: #fff;
+}
+
+/*Text color on hover*/
+.tabs .tab a.active {
+  background-color: #888;
+  color: #fff;
+}
+
+.tabs .indicator {
+  background-color: #000;
+}
