@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useRef } from 'react';
+import { connect } from "react-redux";
 import { Link as RouterLink } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
@@ -65,7 +66,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const TopBar = props => {
-  const { className, ...rest } = props;
+  const { className, auth: { isAuthenticated }, ...rest } = props;
 
   const classes = useStyles();
   const { history } = useRouter();
@@ -75,8 +76,23 @@ const TopBar = props => {
 
   const handleLogout = () => {
     history.push('/auth/login');
-    // dispatch(logout());
+  // dispatch(logout());
   };
+  
+  let button;
+  if(isAuthenticated) {
+	button = <Button
+		        className={classes.logoutButton}
+		        color="inherit"
+		        onClick={handleLogout}
+		        >
+            <InputIcon className={classes.logoutIcon} />
+            	Sign out
+        	   </Button>;
+  }
+  else{
+	button = "";
+  }
 
   return (
     <AppBar
@@ -92,22 +108,21 @@ const TopBar = props => {
           />
         </RouterLink>
         <div className={classes.flexGrow} />
-       	<Button
-            className={classes.logoutButton}
-            color="inherit"
-            onClick={handleLogout}
-          >
-            <InputIcon className={classes.logoutIcon} />
-            Sign out
-        </Button>
-  
+
+       	{button}
+
       </Toolbar>
     </AppBar>
   );
 };
 
 TopBar.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
+  auth: PropTypes.object.isRequired,
 };
 
-export default TopBar;
+const mapStateToProps = state => ({
+    auth: state.auth
+});
+
+export default connect(mapStateToProps, null)(TopBar);

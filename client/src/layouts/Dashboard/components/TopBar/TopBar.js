@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useRef, useEffect } from 'react';
+import { connect } from "react-redux";
 import { Link as RouterLink } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
@@ -30,7 +31,7 @@ import SearchIcon from '@material-ui/icons/Search';
 
 import axios from 'utils/axios';
 import useRouter from 'utils/useRouter';
-import { PricingModal, NotificationsPopover } from 'components';
+import { NotificationsPopover } from 'components';
 import { logout } from 'actions';
 
 const useStyles = makeStyles(theme => ({
@@ -93,16 +94,13 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const TopBar = props => {
-  const { onOpenNavBarMobile, className, ...rest } = props;
+  const { onOpenNavBarMobile, className, auth: { isAuthenticated }, ...rest } = props;
 
   const classes = useStyles();
   const { history } = useRouter();
   const searchRef = useRef(null);
   const dispatch = useDispatch();
   const notificationsRef = useRef(null);
-  const [pricingModalOpen, setPricingModalOpen] = useState(false);
-  const [openSearchPopover, setOpenSearchPopover] = useState(false);
-  const [searchValue, setSearchValue] = useState('');
   const [notifications, setNotifications] = useState([]);
   const [openNotifications, setOpenNotifications] = useState(false);
 
@@ -129,14 +127,6 @@ const TopBar = props => {
     // dispatch(logout());
   };
 
-  const handlePricingOpen = () => {
-    setPricingModalOpen(true);
-  };
-
-  const handlePricingClose = () => {
-    setPricingModalOpen(false);
-  };
-
   const handleNotificationsOpen = () => {
     setOpenNotifications(true);
   };
@@ -145,29 +135,21 @@ const TopBar = props => {
     setOpenNotifications(false);
   };
 
-  const handleSearchChange = event => {
-    setSearchValue(event.target.value);
 
-    if (event.target.value) {
-      if (!openSearchPopover) {
-        setOpenSearchPopover(true);
-      }
-    } else {
-      setOpenSearchPopover(false);
-    }
-  };
-
-  const handleSearchPopverClose = () => {
-    setOpenSearchPopover(false);
-  };
-
-  const popularSearches = [
-    'Devias React Dashboard',
-    'Devias',
-    'Admin Pannel',
-    'Project',
-    'Pages'
-  ];
+  let button;
+  if(isAuthenticated) {
+  button = <Button
+            className={classes.logoutButton}
+            color="inherit"
+            onClick={handleLogout}
+            >
+            <InputIcon className={classes.logoutIcon} />
+              Sign out
+             </Button>;
+  }
+  else{
+  button = "";
+  }
 
   return (
     <AppBar
@@ -183,7 +165,7 @@ const TopBar = props => {
           />
         </RouterLink>
         <div className={classes.flexGrow} />
-  
+
         <Hidden mdDown>
           <IconButton
             className={classes.notificationsButton}
@@ -199,14 +181,7 @@ const TopBar = props => {
               <NotificationsIcon />
             </Badge>
           </IconButton>
-          <Button
-            className={classes.logoutButton}
-            color="inherit"
-            onClick={handleLogout}
-          >
-            <InputIcon className={classes.logoutIcon} />
-            Sign out
-          </Button>
+          {button}
         </Hidden>
         <Hidden lgUp>
           <IconButton
@@ -217,10 +192,6 @@ const TopBar = props => {
           </IconButton>
         </Hidden>
       </Toolbar>
-      <PricingModal
-        onClose={handlePricingClose}
-        open={pricingModalOpen}
-      />
       <NotificationsPopover
         anchorEl={notificationsRef.current}
         notifications={notifications}
@@ -233,7 +204,12 @@ const TopBar = props => {
 
 TopBar.propTypes = {
   className: PropTypes.string,
+  auth: PropTypes.object.isRequired,
   onOpenNavBarMobile: PropTypes.func
 };
 
-export default TopBar;
+const mapStateToProps = state => ({
+    auth: state.auth
+});
+
+export default connect(mapStateToProps, null)(TopBar);
