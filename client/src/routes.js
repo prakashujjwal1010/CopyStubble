@@ -96,9 +96,14 @@ const routes = [
         component: lazy(() => import('views/InvoiceDetails'))
       },
       {
-        path: '/dashboard/management/customers',
+        path: '/dashboard/management/farms',
         exact: true,
-        component: lazy(() => import('views/CustomerManagementList'))
+        component: lazy(() => import('views/FarmsManagementList'))
+      },
+      {
+        path: '/dashboard/management/farms/:id',
+        exact: true,
+        component: lazy(() => import('views/FarmEdit'))
       },
       {
         path: '/dashboard/management/customers/:id',
@@ -111,9 +116,9 @@ const routes = [
         component: lazy(() => import('views/CustomerManagementDetails'))
       },
       {
-        path: '/dashboard/management/projects',
+        path: '/dashboard/management/add-farm',
         exact: true,
-        component: lazy(() => import('views/ProjectManagementList'))
+        component: lazy(() => import('views/AddFarm'))
       },
       {
         path: '/dashboard/management/orders',

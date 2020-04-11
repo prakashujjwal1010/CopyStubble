@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useRef, useEffect } from 'react';
-import { connect } from "react-redux";
 import { Link as RouterLink } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
@@ -208,8 +207,4 @@ TopBar.propTypes = {
   onOpenNavBarMobile: PropTypes.func
 };
 
-const mapStateToProps = state => ({
-    auth: state.auth
-});
-
-export default connect(mapStateToProps, null)(TopBar);
+export default TopBar;

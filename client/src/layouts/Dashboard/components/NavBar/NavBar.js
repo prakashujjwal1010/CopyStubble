@@ -41,11 +41,18 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const NavBar = props => {
-  const { openMobile, onMobileClose, className, ...rest } = props;
-
+  const { openMobile, onMobileClose, className, auth:{ user } , ...rest } = props;
+  let userType;
   const classes = useStyles();
   const router = useRouter();
   const session = useSelector(state => state.session);
+
+  if (user) {
+    userType = user.userType;
+  }
+  else {
+    userType = 'buyer';
+  }
 
   useEffect(() => {
     if (openMobile) {
@@ -73,9 +80,10 @@ const NavBar = props => {
         </Typography>
         <Typography variant="body2">{session.user.bio}</Typography>
       </div>
+
       <Divider className={classes.divider} />
       <nav className={classes.navigation}>
-        {navigationConfig.map(list => (
+        {navigationConfig[userType].map(list => (
           <Navigation
             component="div"
             key={list.title}
@@ -121,7 +129,8 @@ const NavBar = props => {
 NavBar.propTypes = {
   className: PropTypes.string,
   onMobileClose: PropTypes.func,
-  openMobile: PropTypes.bool
+  openMobile: PropTypes.bool,
+  auth: PropTypes.object.isRequired,
 };
 
 export default NavBar;

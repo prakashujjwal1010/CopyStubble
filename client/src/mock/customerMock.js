@@ -3,8 +3,8 @@ import moment from 'moment';
 
 import mock from 'utils/mock';
 
-mock.onGet('/api/management/customers').reply(200, {
-  customers: [
+mock.onGet('/api/management/farms').reply(200, {
+  farms: [
     {
       id: uuid(),
       name: 'Ekaterina Tankova',
@@ -14,6 +14,8 @@ mock.onGet('/api/management/customers').reply(200, {
       currency: '$',
       type: 'Agency',
       projects: '1',
+      lat: 39.55555,
+      lng: 64.5555,
       rating: 5,
       location: 'West Virginia, USA'
     },
@@ -26,6 +28,8 @@ mock.onGet('/api/management/customers').reply(200, {
       type: 'Freelancer',
       currency: '$',
       projects: '3',
+      lat: 39.55555,
+      lng: 64.5555,
       rating: 4.3,
       location: 'Bristow'
     },
@@ -38,6 +42,8 @@ mock.onGet('/api/management/customers').reply(200, {
       type: 'Enterprise',
       currency: '$',
       projects: '0',
+      lat: 39.55555,
+      lng: 64.5555,
       rating: 4.5,
       location: 'Georgia, USA'
     },
@@ -50,6 +56,8 @@ mock.onGet('/api/management/customers').reply(200, {
       type: 'Enterprise',
       currency: '$',
       projects: '6',
+      lat: 39.55555,
+      lng: 64.5555,
       rating: 4,
       location: 'Ohio, USA'
     },
@@ -62,6 +70,8 @@ mock.onGet('/api/management/customers').reply(200, {
       type: 'Agency',
       currency: '$',
       projects: '1',
+      lat: 39.55555,
+      lng: 64.5555,
       rating: 3.5,
       location: 'Texas, USA'
     },
@@ -74,6 +84,8 @@ mock.onGet('/api/management/customers').reply(200, {
       type: 'Agency',
       currency: '$',
       projects: '0',
+      lat: 39.55555,
+      lng: 64.5555,
       rating: 3,
       location: 'California, USA'
     },
@@ -86,6 +98,8 @@ mock.onGet('/api/management/customers').reply(200, {
       type: 'Freelancer',
       currency: '$',
       projects: '0',
+      lat: 39.55555,
+      lng: 64.5555,
       rating: 4,
       location: 'California, USA'
     },
@@ -98,6 +112,8 @@ mock.onGet('/api/management/customers').reply(200, {
       type: 'Agency',
       currency: '$',
       projects: '4',
+      lat: 39.55555,
+      lng: 64.5555,
       rating: 4.5,
       location: 'Nevada, USA'
     },
@@ -110,6 +126,8 @@ mock.onGet('/api/management/customers').reply(200, {
       type: 'Freelancer',
       currency: '$',
       projects: '2',
+      lat: 39.55555,
+      lng: 64.5555,
       rating: 5,
       location: 'Michigan, USA'
     },
@@ -122,6 +140,8 @@ mock.onGet('/api/management/customers').reply(200, {
       type: 'Agency',
       currency: '$',
       projects: '0',
+      lat: 39.55555,
+      lng: 64.5555,
       rating: 3.9,
       location: 'Utah, USA'
     },
@@ -134,6 +154,8 @@ mock.onGet('/api/management/customers').reply(200, {
       type: 'Enterprise',
       currency: '$',
       projects: '7',
+      lat: 39.55555,
+      lng: 64.5555,
       rating: 4.2,
       location: 'Utah, USA'
     }

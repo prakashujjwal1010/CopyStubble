@@ -1,19 +1,20 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
+import { connect } from 'react-redux';
 
 import { Page } from 'components';
 import {
   Header,
   LatestOrders,
-  NewProjects,
   RealTime,
-  RequestCollection,
   TeamTasks,
   TodaysMoney,
-  SystemHealth,
-  PerformanceOverTime
+  PerformanceOverTime,
+  Tile
 } from './components';
+
+import contents from './componentsConfig';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -24,7 +25,16 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const DashboardDefault = () => {
+const DashboardDefault = (props) => {
+  const { auth:{ user }, ...rest } = props;
+  let userType;;
+  if (user) {
+    userType = user.userType;
+  }
+  else {
+    userType = 'buyer';
+  }
+  
   const classes = useStyles();
 
   return (
@@ -38,30 +48,16 @@ const DashboardDefault = () => {
         container
         spacing={3}
       >
+      {contents['farmer'].map(tile => (
         <Grid
           item
-          lg={4}
+          lg={6}
           sm={6}
           xs={12}
         >
-	  <RequestCollection />
+	       <Tile  title={tile.title} href={tile.href} Icon={tile.icon}/>
         </Grid>
-        <Grid
-          item
-          lg={4}
-          sm={6}
-          xs={12}
-        >
-          <SystemHealth />
-        </Grid>
-        <Grid
-          item
-          lg={4}
-          sm={6}
-          xs={12}
-        >
-          <TodaysMoney />
-        </Grid>
+      ))}
         <Grid
           item
           lg={3}
@@ -89,4 +85,8 @@ const DashboardDefault = () => {
   );
 };
 
-export default DashboardDefault;
+const mapStateToProps = state => ({
+    auth: state.auth
+});
+
+export default connect(mapStateToProps, null)(DashboardDefault);

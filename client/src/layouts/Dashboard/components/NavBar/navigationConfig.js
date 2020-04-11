@@ -1,7 +1,9 @@
 /* eslint-disable react/no-multi-comp */
 /* eslint-disable react/display-name */
 import React from 'react';
-import { colors } from '@material-ui/core';
+import {
+  colors
+} from '@material-ui/core';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import ChatIcon from '@material-ui/icons/ChatOutlined';
@@ -20,112 +22,166 @@ import ReceiptIcon from '@material-ui/icons/ReceiptOutlined';
 import SettingsIcon from '@material-ui/icons/SettingsOutlined';
 import ViewModuleIcon from '@material-ui/icons/ViewModule';
 
-import { Label } from 'components';
+import {
+  Label
+} from 'components';
 
-export default [
-  {
-    title: 'Pages',
-    pages: [
-      {
-        title: 'Overview',
-        href: '/dashboard/overview',
-        icon: HomeIcon
-      },
-      {
-        title: 'Dashboards',
-        href: '/dashboards',
-        icon: DashboardIcon,
-        children: [
-          {
-            title: 'Default',
-            href: '/dashboard'
-          },
-          {
-            title: 'Analytics',
-            href: '/dashboard/dashboards/analytics'
-          }
-        ]
-      },
-      {
-        title: 'Management',
-        href: '/dashboard/management',
-        icon: BarChartIcon,
-        children: [
-          {
-            title: 'Customers',
-            href: '/dashboard/management/customers'
-          },
-          {
-            title: 'Customer Details',
-            href: '/dashboard/management/customers/1/summary'
-          },
-          {
-            title: 'Projects',
-            href: '/dashboard/management/projects'
-          },
-          {
-            title: 'Orders',
-            href: '/dashboard/management/orders'
-          },
-          {
-            title: 'Order Details',
-            href: '/dashboard/management/orders/1'
-          }
-        ]
-      },
-      {
-        title: 'Invoice',
-        href: '/dashboard/invoices/1',
-        icon: ReceiptIcon
-      },
-      {
-        title: 'Settings',
-        href: '/dashboard/settings',
-        icon: SettingsIcon,
-        children: [
-          {
-            title: 'General',
-            href: '/dashboard/settings/general'
-          },
-          {
-            title: 'Subscription',
-            href: '/dashboard/settings/subscription'
-          },
-          {
-            title: 'Notifications',
-            href: '/dashboard/settings/notifications'
-          },
-          {
-            title: 'Security',
-            href: '/dashboard/settings/security'
-          }
-        ]
-      },
-      {
-        title: 'Authentication',
-        href: '/auth',
-        icon: LockOpenIcon,
-        children: [
-          {
-            title: 'Login',
-            href: '/auth/login'
-          },
-          {
-            title: 'Register',
-            href: '/auth/register'
-          }
-        ]
-      }
-    ]
-  },
-  {
-    title: 'Support',
-    pages: [
-      {
+const contents = {
+  farmer: [{
+      title: 'Pages',
+      pages: [{
+          title: 'Overview',
+          href: '/dashboard/overview',
+          icon: HomeIcon
+        },
+        {
+          title: 'Dashboards',
+          href: '/dashboards',
+          icon: DashboardIcon,
+          children: [{
+              title: 'Default',
+              href: '/dashboard'
+            },
+            {
+              title: 'Analytics',
+              href: '/dashboard/dashboards/analytics'
+            }
+          ]
+        },
+        {
+          title: 'Management',
+          href: '/dashboard/management',
+          icon: BarChartIcon,
+          children: [{
+              title: 'Farms',
+              href: '/dashboard/management/farms'
+            },
+            {
+              title: 'Customer Details',
+              href: '/dashboard/management/customers/1/summary'
+            },
+            {
+              title: 'Orders',
+              href: '/dashboard/management/orders'
+            },
+            {
+              title: 'Order Details',
+              href: '/dashboard/management/orders/1'
+            }
+          ]
+        },
+        {
+          title: 'Invoice',
+          href: '/dashboard/invoices/1',
+          icon: ReceiptIcon
+        },
+        {
+          title: 'Settings',
+          href: '/dashboard/settings',
+          icon: SettingsIcon,
+          children: [{
+              title: 'General',
+              href: '/dashboard/settings/general'
+            },
+            {
+              title: 'Subscription',
+              href: '/dashboard/settings/subscription'
+            },
+            {
+              title: 'Notifications',
+              href: '/dashboard/settings/notifications'
+            },
+            {
+              title: 'Security',
+              href: '/dashboard/settings/security'
+            }
+          ]
+        }
+      ]
+    },
+    {
+      title: 'Support',
+      pages: [{
         title: 'Getting started',
         href: '/getting-started',
         icon: CodeIcon
-      }
-    ]
-  }
-];
+      }]
+    }
+  ],
+  buyer: [{
+      title: 'Pages',
+      pages: [{
+          title: 'Overview',
+          href: '/dashboard/overview',
+          icon: HomeIcon
+        },
+        {
+          title: 'Dashboards',
+          href: '/dashboards',
+          icon: DashboardIcon,
+          children: [{
+              title: 'Default',
+              href: '/dashboard'
+            },
+            {
+              title: 'Analytics',
+              href: '/dashboard/dashboards/analytics'
+            }
+          ]
+        },
+        {
+          title: 'Management',
+          href: '/dashboard/management',
+          icon: BarChartIcon,
+          children: [{
+              title: 'Orders',
+              href: '/dashboard/management/orders'
+            },
+            {
+              title: 'Order Details',
+              href: '/dashboard/management/orders/1'
+            }
+          ]
+        },
+        {
+          title: 'Invoice',
+          href: '/dashboard/invoices/1',
+          icon: ReceiptIcon
+        },
+        {
+          title: 'Settings',
+          href: '/dashboard/settings',
+          icon: SettingsIcon,
+          children: [{
+              title: 'General',
+              href: '/dashboard/settings/general'
+            },
+            {
+              title: 'Subscription',
+              href: '/dashboard/settings/subscription'
+            },
+            {
+              title: 'Notifications',
+              href: '/dashboard/settings/notifications'
+            },
+            {
+              title: 'Security',
+              href: '/dashboard/settings/security'
+            }
+          ]
+        }
+      ]
+    },
+    {
+      title: 'Support',
+      pages: [{
+        title: 'Getting started',
+        href: '/',
+        icon: CodeIcon
+      }]
+    }
+  ]
+
+};
+
+export default contents;

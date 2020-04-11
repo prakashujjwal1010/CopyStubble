@@ -104,7 +104,7 @@ const LoginForm = props => {
           name="email"
           onChange={handleChange}
           value={formState.values.email || ''}
-          variant="outlined"
+        
         />
         <TextField
           error={hasError('password')}

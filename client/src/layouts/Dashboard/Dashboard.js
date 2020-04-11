@@ -1,4 +1,5 @@
 import React, { Suspense, useState } from 'react';
+import { connect } from "react-redux";
 import { renderRoutes } from 'react-router-config';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
@@ -36,7 +37,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const Dashboard = props => {
-  const { route } = props;
+  const { route, auth } = props;
 
   const classes = useStyles();
   const [openNavBarMobile, setOpenNavBarMobile] = useState(false);
@@ -54,12 +55,14 @@ const Dashboard = props => {
       <TopBar
         className={classes.topBar}
         onOpenNavBarMobile={handleNavBarMobileOpen}
+        auth={auth}
       />
       <div className={classes.container}>
         <NavBar
           className={classes.navBar}
           onMobileClose={handleNavBarMobileClose}
           openMobile={openNavBarMobile}
+          auth={auth}
         />
         <main className={classes.content}>
           <Suspense fallback={<LinearProgress />}>
@@ -67,13 +70,18 @@ const Dashboard = props => {
           </Suspense>
         </main>
       </div>
-      
+
     </div>
   );
 };
 
 Dashboard.propTypes = {
-  route: PropTypes.object
+  route: PropTypes.object,
+  auth: PropTypes.object.isRequired
 };
 
-export default Dashboard;
+const mapStateToProps = state => ({
+    auth: state.auth
+});
+
+export default connect(mapStateToProps, null)(Dashboard);
